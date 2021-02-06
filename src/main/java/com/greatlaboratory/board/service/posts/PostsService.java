@@ -2,12 +2,16 @@ package com.greatlaboratory.board.service.posts;
 
 import com.greatlaboratory.board.domain.posts.Posts;
 import com.greatlaboratory.board.domain.posts.PostsRepository;
+import com.greatlaboratory.board.web.dto.PostsListResponseDto;
 import com.greatlaboratory.board.web.dto.PostsResponseDto;
 import com.greatlaboratory.board.web.dto.PostsSaveRequestDto;
 import com.greatlaboratory.board.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -33,8 +37,18 @@ public class PostsService { // service layer에선 비즈니스 로직이 아닌
         return id;
     }
 
+
+    @Transactional(readOnly = true)
     public PostsResponseDto findById(Long id){
         Posts postsEntity = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당하는 아이디의 게시글이 없습니다. id="+id));
         return new PostsResponseDto(postsEntity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc(){
+        return postsRepository.findAllDesc()
+                .stream()
+                .map(posts -> new PostsListResponseDto(posts))
+                .collect(Collectors.toList());
     }
 }
