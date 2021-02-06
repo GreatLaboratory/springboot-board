@@ -37,6 +37,12 @@ public class PostsService { // service layer에선 비즈니스 로직이 아닌
         return id;
     }
 
+    @Transactional
+    public void delete(Long id) {
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id="+id));
+        postsRepository.delete(posts);
+    }
 
     @Transactional(readOnly = true)
     public PostsResponseDto findById(Long id){
