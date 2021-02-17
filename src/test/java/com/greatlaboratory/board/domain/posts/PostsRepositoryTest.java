@@ -49,7 +49,7 @@ public class PostsRepositoryTest {
     public void BaseTimeEntityAudit(){
         // given
         LocalDateTime now = LocalDateTime.of(2021,2,3,0,0,0);
-        LocalDateTime tomorrow = LocalDateTime.of(2021,2,4,0,0,0);
+        LocalDateTime tomorrow = LocalDateTime.of(2221,12,4,0,0,0);
         postsRepository.save(Posts.builder().title("title").content("content").author("author").build());
 
         // when
