@@ -40,6 +40,7 @@ deploy:
       key: springboot-board.zip
       bundle_type: zip
       application: greatlaboratory-board
+      deployment_group_name: greatlaboratory-board-group
       region: ap-northeast-2
       wait-until-deployed: true
 
