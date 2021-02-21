@@ -18,9 +18,9 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-    - zip -r greatlaboratory_board
+    - zip -r springboot-board *
     - mkdir -p deploy
-    - mv greatlaboratory_board.zip deploy/greatlaboratory_board.zip
+    - mv springboot-board.zip deploy/springboot-board.zip
 
 deploy:
     - provider: s3
