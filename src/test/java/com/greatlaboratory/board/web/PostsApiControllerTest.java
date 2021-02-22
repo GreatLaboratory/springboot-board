@@ -54,7 +54,7 @@ public class PostsApiControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER") // 해당 어노테이션은 MockMvc에서만 작동, USER권한을 가지는 가짜 사용자 만들어서 사용
+    @WithMockUser(roles = "GUEST") // 해당 어노테이션은 MockMvc에서만 작동, GUEST권한을 가지는 가짜 사용자 만들어서 사용
     public void PostsSave() throws Exception {
         // given
         String title = "test title";
@@ -80,7 +80,7 @@ public class PostsApiControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    @WithMockUser(roles = "GUEST")
     public void PostsUpdate() throws Exception {
         // given
         String title = "test title";
