@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     // url별 권한 관리를 설정하는 옵션의 시작점이 authorizeRequests
                     .authorizeRequests()
-                    .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll() // 해당 url엔 인증되지 않은 사용자 포함해서 전체에게 허용
+                    .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll() // 해당 url엔 인증되지 않은 사용자 포함해서 전체에게 허용
                     .antMatchers("/api/v1/**").hasRole(Role.GUEST.name()) // GUEST의 ROLE을 가지고 있는 인증된 사용자만 해당 url 접근 허용
                     .anyRequest().authenticated() // 나머지 URL들 전부는 모두 인증된 사용자에게만 허용 (즉, 로그인된 사용자)
                 .and()
