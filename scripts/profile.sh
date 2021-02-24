@@ -2,18 +2,16 @@
 
 # 쉬고 있는 profile 찾기 : real1이 사용중이면 real2가 쉬고 있고, 반대면 real1이 쉬고 있음.
 function find_idle_profile() {
-#    RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/profile)
-#
-#    if [ "${RESPONSE_CODE}" -ge 400 ]
-#    then
-#        CURRENT_PROFILE=real2
-#    else
-#        CURRENT_PROFILE=$(curl -s http://localhost/profile)
-#    fi
+    RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://ec2-52-78-143-236.ap-northeast-2.compute.amazonaws.com/profile)
 
-    CURRENT_PROFILE=$(curl -s http://localhost/profile)
+    if [ "${RESPONSE_CODE}" -ge 400 ]
+    then
+        CURRENT_PROFILE=real2
+    else
+        CURRENT_PROFILE=$(curl -s http://ec2-52-78-143-236.ap-northeast-2.compute.amazonaws.com/profile)
+    fi
 
-    if [ ${CURRENT_PROFILE} == real1 ]
+    if [ "${CURRENT_PROFILE}" == real1 ]
     then
         IDLE_PROFILE=real2
     else
@@ -27,7 +25,7 @@ function find_idle_profile() {
 function find_idle_port() {
     IDLE_PROFILE=$(find_idle_profile)
 
-    if [ ${IDLE_PROFILE} == real1 ]
+    if [ "${IDLE_PROFILE}" == real1 ]
     then
         echo "8081"
     else
